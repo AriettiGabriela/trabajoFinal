@@ -9,6 +9,23 @@
   <title>Ideas de papel</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
+    <script>
+      // Función para guardar la posición del scroll
+      function guardarScrollPosicion() {
+          sessionStorage.setItem('scrollPos', window.scrollY);
+      }
+
+      // Función para restaurar la posición del scroll
+      function restaurarScrollPosicion() {
+          var scrollPos = sessionStorage.getItem('scrollPos') || 0;
+          window.scrollTo(0, scrollPos);
+      }
+
+      // Llamamos a restaurar la posición al cargar la página
+      window.onload = restaurarScrollPosicion;
+      // Llamamos a guardar la posición al cambiar de página
+      window.onbeforeunload = guardarScrollPosicion;
+  </script>
 </head>
 <body>
   <!--HEADER-->
@@ -25,7 +42,8 @@
   </header>
   <!--NAVBAR-->
   <nav class="line">
-    <a href="{{url_for('about')}}">NOSOTROS</a>
+    <a href="{{url_for('home')}}">INICIO</a>
+    <a href="{{url_for('about')}}">NOSOTRAS</a>
     <a href="{{url_for('tienda')}}">TIENDA</a>
     <a href="{{url_for('aula')}}">AULA VIRTUAL</a>
     <a href="{{url_for('contacto')}}">CONTACTO</a>

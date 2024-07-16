@@ -1,5 +1,26 @@
 {% extends "layout.html" %} {%block content%}
-<h1>HOLA! VENDEMOS CURSOS PARA DECORACIONES DE CUMPLES</h1>
+<section class="noticias">
+    <article class="noticia1">
+        <div class="row mt-4">
+            <div class="col" id="noti1">
+                <h2>¿LISTA PARA IR MÁS ALLÁ?</h2>
+                <br>
+                <p>Descubre nuestro universo de cursos online donde aprenderás a crear los productos más sorprendentes
+                    para celebraciones inolvidables. Desde golosinas hasta decoraciones temáticas y mucho más,
+                    nuestros expertos te guiarán paso a paso en el arte de hacer realidad las ideas más brillantes.</p>
 
+                <p>Ideal para quienes desean iniciar su propio negocio o expandir su oferta actual, nuestros cursos
+                    están diseñados para que puedas aprender desde cualquier lugar y a tu propio ritmo. Con material
+                    didáctico detallado y sesiones interactivas, te convertirás en un profesional en el armado de
+                    productos para cumpleaños y eventos especiales.</p>
 
-{%endblock%}
+                <p>¡Empieza hoy mismo y convierte tu pasión en un negocio exitoso!</p>
+            </div>
+            <div class="col-lg-5 col-sm-12">
+                <img class="img-fluid" id="fotonoticia1" src="{{ url_for('static', filename='img/noticia.jpg')}}"
+                    alt="manos trabajando con papel">
+            </div>
+        </div>
+    </article>
+
+    {%endblock%}
