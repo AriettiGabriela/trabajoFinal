@@ -183,7 +183,7 @@ div#noti1.col h2 {
   border-radius: 0px 10px 10px 0px;
   padding: 15px;
 }
-div#noti2.col h2{
+div#noti2.col h2 {
   margin: 10px 0px;
 }
 
@@ -206,7 +206,7 @@ img#fotonoticia2.img-fluid {
   border-radius: 10px 0px 0px 10px;
   object-fit: cover;
 }
- /* ESTILOS FORM */
+/* ESTILOS FORM */
 .containerForm {
   max-width: 600px;
   margin: 0 auto;
@@ -226,7 +226,8 @@ h2 {
   display: block;
   font-weight: bold;
 }
-.form-group input, .form-group textarea {
+.form-group input,
+.form-group textarea {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
@@ -248,4 +249,33 @@ h2 {
 .form-group button:hover {
   background-color: #4293c2;
   transform: scale(1.1);
+}
+
+/*ESTILOS CARDS*/
+.card-deck {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+
+}
+.card {
+  background-color: #fff;
+  color: #000;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px #000;
+  transition: all 0.3s ease-in-out;
+  margin: 1%;
+  max-width: 30%;
+}
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 0px 20px #000;
+}
+.card-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+.card-text {
+  font-size: 18px;
 }
