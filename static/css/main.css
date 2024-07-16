@@ -151,8 +151,7 @@ li.ms-3 img {
 }
 /*ESTILOS DINAMICOS*/
 .info {
-  margin: 3vh 5vw;
-  padding: 2%;
+  margin-top: 3vh;
   background-color: #ffffffde;
   border-radius: 10px;
   text-align: center;
@@ -281,4 +280,57 @@ h2 {
 }
 .card-text {
   font-size: 18px;
+}
+
+/*ESTILOS AULA*/
+.aula {
+  background-image: url(../img/banneraula.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.formulario {
+  background-color: #ffffff99;
+  padding: 30px;
+  border-radius: 25px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+height: 450px;
+width: 500px;
+
+}
+
+input,
+#regBtn {
+  border-radius: 15px;
+  height: 12%;
+  border-color: #fff;
+  font-size: 0.85em;
+}
+
+input::file-selector-button:hover {
+  background-color: #3aacae;
+  color: #fff;
+}
+
+#submit,
+#regBtn {
+  background-color: #46c6cd;
+  border-style: solid;
+  border-color: #0fb2d7;
+  color: #fff;
+  font-size: 1em;
+}
+
+#submit:hover,
+#regBtn:hover {
+  background-color: #4caccc;
+  color: #ffffff;
 }
