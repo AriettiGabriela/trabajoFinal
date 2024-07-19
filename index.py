@@ -31,6 +31,10 @@ def login():
 def registro():
     return render_template("registro.html")
 
+@app.route('/detalle')
+def detalle():
+    return render_template("detalle.html")
+
 # validamos si estamos en el archivo principal para que siempre se quede
 # escuchando una peticion del usuario y si se cumple ejecuta el app.run
 if __name__ == '__main__':

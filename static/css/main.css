@@ -309,7 +309,9 @@ h2 {
 input,
 #regBtn,
 #logBtn,
-#datBtn {
+#datBtn,
+.botoncito,
+#buyBtn {
   border-radius: 15px;
   height: 12%;
   border-color: #fff;
@@ -324,7 +326,9 @@ input::file-selector-button:hover {
 #submit,
 #regBtn,
 #logBtn,
-#datBtn {
+#datBtn,
+.botoncito,
+#buyBtn {
   background-color: #46c6cd;
   border-style: solid;
   border-color: #0fb2d7;
@@ -335,10 +339,14 @@ input::file-selector-button:hover {
   height: fit-content;
 }
 
+
+
 #submit:hover,
 #regBtn:hover,
 #logBtn:hover,
-#datBtn:hover {
+#datBtn:hover,
+.botoncito:hover,
+#buyBtn:hover {
   background-color: #4caccc;
   color: #ffffff;
 }
@@ -395,5 +403,33 @@ input::file-selector-button:hover {
   font-size: 5rem;
 }
 #title {
-  font-size: 3rem
+  font-size: 3rem;
+}
+/*ESTILOS DETALLE*/
+#portadacurso {
+  width: 75%;
+}
+#titulo {
+  font-size: 5.5vw;
+  color: #408ea0;
+  margin-top: 4%;
+}
+.detalles {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#fotocurso,
+.textos {
+  width: 600px;
+}
+.textos {
+  margin-top: 3%;
+  text-align: left !important;
+}
+#buyBtn{
+  width: 200px;
+  font-size: 1.5em;
 }

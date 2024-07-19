@@ -46,11 +46,19 @@
                     valor.classList.add('card-text');
                     valor.textContent = 'Valor: $' + objeto.precio;
 
+                    const info = document.createElement('button');
+                    info.classList.add('botoncito');
+                    info.textContent = 'Comprar';
+                    info.addEventListener("click", function (detalle) {
+                        window.location.href = "detalle?id=" + encodeURIComponent(objeto.id);
+                    });
+
                     // Agregar los elementos a la card, crea los elementos HTML que conforman una tarjeta y los agrega en el orden correspondiente, para finalmente agregar la tarjeta completa al contenedor de tarjetas.
                     cardBody.appendChild(titulo);
                     cardBody.appendChild(textocorto);
                     cardBody.appendChild(duracion);
                     cardBody.appendChild(valor);
+                    cardBody.appendChild(info);
 
                     card.appendChild(imagen);
                     card.appendChild(cardBody);

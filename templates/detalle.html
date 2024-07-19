@@ -1,0 +1,34 @@
+{% extends "layout.html" %} {%block content%}
+<div>
+    <img id="portadacurso" src="">
+    <h1 id="titulo"></h1>
+    <div class="detalles">
+        <img id="fotocurso" src="" alt="">
+        <div class="textos">
+            <h4 id="textlargo"></h4><br>
+            <h5 id="tiempo"></h5><br>
+            <h5 id="precio"></h5><br>
+            <button id="buyBtn">comprar</button>
+            <!--tiene que abrir un form donde ponga el dni, valide que es alumno y otro boton confirme la carga-->
+        </div>
+    </div>
+</div>
+
+<script>
+    var urlParams = new URLSearchParams(window.location.search);
+    var cursoId = urlParams.get("id");
+    fetch("https://tiendacursosidp-default-rtdb.firebaseio.com/cursos/" + cursoId + ".json")
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            document.getElementById("portadacurso").src = data.portada;
+            document.getElementById("titulo").textContent = data.nombre;
+            document.getElementById("fotocurso").src = data.foto;
+            document.getElementById("textlargo").textContent = data.textlargo;
+            document.getElementById("tiempo").textContent = 'Duración del curso: ' + data.duracion;
+            document.getElementById("precio").textContent = 'Valor: $' + data.precio;
+        })
+
+</script>
+{%endblock%}
