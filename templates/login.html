@@ -33,7 +33,7 @@
                         for (var key in data) {
                             if (data.hasOwnProperty(key) && data[key].pass === passInput) {
                                 userId = key;
-                                window.location.href = "{{url_for('aula')}}";
+                                window.location.href = "aula?id=" + encodeURIComponent(userId);
                                 break;
                             }
                             else {

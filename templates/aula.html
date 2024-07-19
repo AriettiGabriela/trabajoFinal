@@ -1,6 +1,164 @@
 {% extends "layout.html" %} {%block content%}
+<div class="aula">
+    <div class="divperfil">
+        <div class="nameline">
+            <h1 id="hola">Hola nombre</h1>
+            <img id="imgperfil" src="perfildefault.jpg" alt="foto perfil">
+        </div>
+        <button type="button" id="datBtn">Editar mis datos</button>
+        <h2 id="title">Tus cursos</h2>
+        <h2 id="vacio"></h2>
+        <div class="container">
+            <div class="card-deck" id="card-deck"></div>
+        </div>
+    </div>
+</div>
+<script>
+    // Obtener el ID del registro desde la URL
+    var urlParams = new URLSearchParams(window.location.search);
+    var userId = urlParams.get("id");
 
-            <h2>aca va el aula donde muestra los cursos que compraste y </h2>
+    // Obtener los datos del registro desde la API
+    var registroUrl = "https://basealumnosidp-default-rtdb.firebaseio.com/alumnos/" + userId + ".json";
+    fetch(registroUrl)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            document.getElementById("hola").textContent = "Hola " + data.nombre;
+            document.getElementById("imgperfil").src = data.perfil;
+
+            //probar
+            const cursos = [data.curso1, data.curso2, data.curso3];
+            cursos.forEach(llamaCards)
+            function llamaCards(value, index, array) {
+                if (value !== "null" || value !== "") {
+
+                    fetch("https://tiendacursosidp-default-rtdb.firebaseio.com/cursos/" + value + ".json")
+                        .then(function (response) {
+                            return response.json();
+                        })
+                        .then(function (curso) {
+                            const cardDeck = document.getElementById('card-deck');
+
+                            // Crear los elementos HTML para la card
+                            const card = document.createElement('div');  //Aquí se está creando un nuevo elemento HTML div y asignándolo a la variable card. Luego se agrega la clase "card" a ese elemento utilizando el método classList.add().
+                            card.classList.add('card');
+
+                            const imagen = document.createElement('img');
+                            imagen.classList.add('card-img-top');
+                            imagen.src = curso.foto;
+
+                            const cardBody = document.createElement('div');
+                            cardBody.classList.add('card-body');
+
+                            const titulo = document.createElement('h5');
+                            titulo.classList.add('card-title');
+                            titulo.textContent = curso.nombre;
+
+                            const duracion = document.createElement('p');
+                            duracion.classList.add('card-text');
+                            duracion.textContent = 'Duración: ' + curso.duracion;
+
+
+                            // Agregar los elementos a la card, crea los elementos HTML que conforman una tarjeta y los agrega en el orden correspondiente, para finalmente agregar la tarjeta completa al contenedor de tarjetas.
+                            cardBody.appendChild(titulo);
+                            cardBody.appendChild(duracion);
+                            card.appendChild(imagen);
+                            card.appendChild(cardBody);
+                            cardDeck.appendChild(card);
+                        })
+                        .catch(function (error) {
+                            console.error(error);
+                        });
+                }
+            }
+
+        })
+
+
+    /*  //
+     //test- obtener los cursos comprados (ver de haecr un array)
+     var curso1 = data.curso1;
+     var curso2 = data.curso2;
+     var curso3 = data.curso3; */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
+                // Obtener los datos del curso desde la API
+                var cursosUrl = "https://tiendacursosidp-default-rtdb.firebaseio.com/cursos.json";
+                fetch(cursosUrl)
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (cursosData) {
+                        // Buscar el curso que coincida con el nombre del curso del registro
+                        for (var key in cursosData) {
+                            if (cursosData.hasOwnProperty(key) && cursosData[key].id === curso1) {
+                                var cursoEncontrado = cursosData[key];
+                                // Mostrar los datos del curso
+                                mostrarDatosCurso(cursoEncontrado);
+                                break;
+                            }
+                        }
+                    })
+                    .catch(function (error) {
+                        console.error(error);
+                    });
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
+        function mostrarDatosCurso(curso) {
+            const cardDeck = document.getElementById('card-deck');
+            cardDeck.innerHTML = '';
+
+            // Crear los elementos HTML para la card
+            const card = document.createElement('div');  //Aquí se está creando un nuevo elemento HTML div y asignándolo a la variable card. Luego se agrega la clase "card" a ese elemento utilizando el método classList.add().
+            card.classList.add('card');
+
+            const imagen = document.createElement('img');
+            imagen.classList.add('card-img-top');
+            imagen.src = curso.foto;
+
+            const cardBody = document.createElement('div');
+            cardBody.classList.add('card-body');
+
+            const titulo = document.createElement('h5');
+            titulo.classList.add('card-title');
+            titulo.textContent = curso.nombre;
+
+            const duracion = document.createElement('p');
+            duracion.classList.add('card-text');
+            duracion.textContent = 'Duración: ' + curso.duracion;
+
+
+            // Agregar los elementos a la card, crea los elementos HTML que conforman una tarjeta y los agrega en el orden correspondiente, para finalmente agregar la tarjeta completa al contenedor de tarjetas.
+            cardBody.appendChild(titulo);
+            cardBody.appendChild(duracion);
+            card.appendChild(imagen);
+            card.appendChild(cardBody);
+            cardDeck.appendChild(card);
+        }
+        mostrarDatosCurso(); */
+
+</script>
 
 
 {%endblock%}
