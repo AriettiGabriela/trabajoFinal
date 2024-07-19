@@ -4,8 +4,6 @@
         <h1>Registrate</h1>
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" required>
-        <label for="dni">DNI:</label>
-        <input type="text" id="dni" required>
         <label for="mail">Mail:</label>
         <input type="text" id="mail" required>
         <label for="pass">Contraseña:</label>
@@ -21,11 +19,10 @@
 
     document.getElementById("regForm").addEventListener("submit", function (event) {
         event.preventDefault();
-        var dniInput = document.getElementById("dni").value;
+        var mailInput = document.getElementById("mail").value;
         var url = "https://basealumnosidp-default-rtdb.firebaseio.com/alumnos.json";
         var datos = {
             nombre: document.getElementById("nombre").value,
-            dni: document.getElementById("dni").value,
             mail: document.getElementById("mail").value,
             pass: document.getElementById("pass").value,
             curso1: "candy", //la idea es cargalos con la "compra" deberia ser un array
@@ -41,10 +38,10 @@
             })
             .then(function (data) {
                 // Verificar si el DNI existe en algún registro
-                var dniExiste = false;
+                var mailExiste = false;
                 for (var key in data) {
-                    if (data.hasOwnProperty(key) && data[key].dni === dniInput) {
-                        dniExiste = true;
+                    if (data.hasOwnProperty(key) && data[key].mail === mailInput) {
+                        mailExiste = true;
                         alert("El usuario ya se encuentra registrado. Inicie sesión por favor");
                         window.location.href = "{{url_for('login')}}";
                         break;

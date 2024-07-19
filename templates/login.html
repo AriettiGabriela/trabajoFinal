@@ -3,8 +3,8 @@
 
     <form class="formulario" id="loginForm">
         <h1>INICIA SESION</h1>
-        <label for="mail">Mail:</label>
-        <input type="text" id="mail" required>
+        <label for="dni">DNI:</label>
+        <input type="text" id="dni" required>
         <label for="pass">Contraseña:</label>
         <input type="password" id="pass" required>
         <input type="submit" id="submit" value="Iniciar Sesión">
@@ -14,12 +14,12 @@
 <script>
     document.getElementById("loginForm").addEventListener("submit", function (event) {
         event.preventDefault(); // Evitar que se envíe el formulario automáticamente
-        var mailInput = document.getElementById("mail").value;
+        var dniInput = document.getElementById("dni").value;
         var passInput = document.getElementById("pass").value;
         var url = "https://basealumnosidp-default-rtdb.firebaseio.com/alumnos.json";
 
         // Realizar la petición GET a la API para obtener los registros
-        fetch(url)
+        fetch("https://basealumnosidp-default-rtdb.firebaseio.com/alumnos.json")
             .then(function (response) {
                 return response.json();
             })
@@ -29,9 +29,9 @@
 
                 // Buscar el registro que coincida con el MAIL y la contraseña ingresados
                 for (var key in data) {
-                    if (data.hasOwnProperty(key) && data[key].mail === mailInput) {
+                    if (data.hasOwnProperty(key) && data[key].dni == dniInput) {
                         for (var key in data) {
-                            if (data.hasOwnProperty(key) && data[key].pass == passInput) {
+                            if (data.hasOwnProperty(key) && data[key].pass === passInput) {
                                 userId = key;
                                 window.location.href = "{{url_for('aula')}}";
                                 break;
