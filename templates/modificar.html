@@ -10,7 +10,8 @@
     <label for="pass">Contraseña:</label>
     <input type="password" id="pass" required>
     <label for="foto">Modificar foto:</label>
-    <input type="file" name="imgperfil" id="file" required>
+    <input type="file" name="foto" id="foto" required>
+    <input type="submit" id="btnsubmit" value="Confirmar">
 </form>
 <style>
     #header,
@@ -22,16 +23,91 @@
     var urlParams = new URLSearchParams(window.location.search);
     var userId = urlParams.get("id");
     var registroUrl = "https://basealumnosidp-default-rtdb.firebaseio.com/alumnos/" + userId + ".json";
+
     fetch(registroUrl)
         .then(function (response) {
+            if (!response.ok) {
+                throw new Error("network no response");
+            }
             return response.json();
         })
+
         .then(function (data) {
             document.getElementById("nombre").value = data.nombre;
             document.getElementById("dni").value = data.dni;
             document.getElementById("mail").value = data.mail;
             document.getElementById("pass").value = data.pass;
         })
+        .catch(function (error) {
+            console.error("error obetinendo datos", error);
+        });
+
+    document.getElementById("foto").addEventListener("change", function () {
+        var file = this.files[0];
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            var previewImg = document.getElementById("previewImg");
+            previewImg.src = e.target.result;
+            previewImg.style.display = "block";
+        };
+
+        // Leer el archivo como base64
+        reader.readAsDataURL(file);
+    });
+
+
+    document.getElementById("formDatos").addEventListener("submit", function (event) {
+        event.preventDefault(); // Evitar que se envíe el formulario automáticamente
+
+        var nameInput = document.getElementById("nombre").value;
+        var dniInput = document.getElementById("dni").value;
+        var mailInput = document.getElementById("mail").value;
+        var passInput = document.getElementById("pass").value;
+        var fotoInput = document.getElementById("foto");
+        var foto64 = "";
+        if (fotoInput.files.length > 0) {
+            var file = fotoInput.files[0];
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                fotoBase64 = e.target.result;
+                updateAlumno();
+            };
+            reader.readAsDataURL(file);
+        } else {
+            updateAlumno();
+        }
+
+        function updateAlumno() {
+            var url = "https://basealumnosidp-default-rtdb.firebaseio.com/alumnos/" + userId + ".json";
+
+            var data = {
+                nombre: nameInput,
+                dni: dniInput,
+                mail: mailInput,
+                pass: passInput,
+                perfil: foto64
+            };
+
+            fetch(url, {
+                method: 'PUT',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error("network no response");
+                    }
+                    alert('Datos actualizados correctamente');
+                })
+                .catch(function (error) {
+                    console.error('Error al actualizar los datos', error);
+                    alert('Error al actualizar');
+                });
+        }
+    });
 
 </script>
 {%endblock%}

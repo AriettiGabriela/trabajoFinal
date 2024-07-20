@@ -313,7 +313,8 @@ input,
 .botoncito,
 #buyBtn,
 .botoncito2,
-#outBtn {
+#outBtn,
+#btnsubmit {
   border-radius: 15px;
   height: 12%;
   border-color: #fff;
@@ -332,7 +333,8 @@ input::file-selector-button:hover {
 .botoncito,
 #buyBtn,
 .botoncito2,
-#outBtn {
+#outBtn,
+#btnsubmit {
   background-color: #46c6cd;
   border-style: solid;
   border-color: #0fb2d7;
@@ -350,7 +352,8 @@ input::file-selector-button:hover {
 .botoncito:hover,
 #buyBtn:hover,
 .botoncito2:hover,
-#outBtn:hover {
+#outBtn:hover,
+#btnsubmit:hover {
   background-color: #4caccc;
   color: #ffffff;
 }
