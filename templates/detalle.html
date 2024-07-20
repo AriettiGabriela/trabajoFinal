@@ -28,7 +28,33 @@
             document.getElementById("textlargo").textContent = data.textlargo;
             document.getElementById("tiempo").textContent = 'Duración del curso: ' + data.duracion;
             document.getElementById("precio").textContent = 'Valor: $' + data.precio;
+
         })
 
+
+    document.getElementById("buyBtn").addEventListener("click", function () {
+        // Aquí puedes definir el ID del curso, si es necesario
+        var cursoId = urlParams.get("id"); // Reemplaza con la lógica para obtener el ID del curso
+
+        // Construye la URL con el ID del curso
+
+        var url = "compra?id=" + encodeURIComponent(cursoId);
+
+        // Dimensiones de la ventana
+        var ventanaAncho = 550;
+        var ventanaAlto = 700;
+
+        // Calcular las coordenadas para centrar la ventana
+        var ventanaIzquierda = (window.screen.width - ventanaAncho) / 2;
+        var ventanaArriba = (window.screen.height - ventanaAlto) / 2;
+
+        // Opciones de la ventana
+        var opcionesVentana = 'width=' + ventanaAncho + ',height=' + ventanaAlto;
+        opcionesVentana += ',left=' + ventanaIzquierda + ',top=' + ventanaArriba;
+        opcionesVentana += ',location=no,menubar=no,status=no,toolbar=no,scrollbars=yes,resizable=yes';
+
+        // Abrir la ventana
+        window.open(url, '_blank', opcionesVentana);
+    });
 </script>
 {%endblock%}

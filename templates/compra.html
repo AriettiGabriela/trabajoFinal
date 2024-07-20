@@ -1,0 +1,95 @@
+{% extends "layout.html" %} {%block content%}
+<form class="formCompra" id="loginForm">
+    <h1 id="titulo">NOMBRE DEL CURSO</h1>
+    <h2>Ingresa tus datos para comprar</h2>
+    <label for="dni">DNI:</label>
+    <input type="text" id="dni" required>
+    <label for="pass">Contraseña:</label>
+    <input type="password" id="pass" required>
+    <input type="submit" id="submit" value="Comprar">
+</form>
+
+<style>
+    #header,
+    .line {
+        display: none;
+    }
+</style>
+<script>
+    var urlParams = new URLSearchParams(window.location.search);
+    var cursoId = urlParams.get("id");
+    fetch("https://tiendacursosidp-default-rtdb.firebaseio.com/cursos/" + cursoId + ".json")
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            document.getElementById("titulo").textContent = data.nombre;
+        })
+
+    document.getElementById("formCompra").addEventListener("submit", function (event) {
+        event.preventDefault(); // Evitar que se envíe el formulario automáticamente
+        var dniInput = document.getElementById("dni").value;
+        var passInput = document.getElementById("pass").value;
+
+        // Realizar la petición GET a la API para obtener los registros
+        fetch("https://basealumnosidp-default-rtdb.firebaseio.com/alumnos.json")
+            .then(function (response) {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error("Error al obtener los datos de la base");
+            })
+            .then(function (data) {
+                var userFound = false;
+                var userId;
+
+
+                for (var key in data) {
+                    if (data.hasOwnProperty(key)) {
+                        if (data[key].dni === dniInput) {
+                            userId = key;
+                            userFound = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (!userFound) {
+                    alert("El usuario no esta registrado");
+                    return;
+                }
+
+                if (data[userId].pass === passInput) {
+                    if (cursoId === "candy") {
+                        fetch('https://basealumnosidp-default-rtdb.firebaseio.com/alumnos/' + userId + '.json', {
+                            method: 'PUT',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                "curso1": "candy",
+                            })
+                        })
+                            .then(response => {
+                                if (response.ok) {
+                                    alert('El curso ha sido agregado con éxito');
+                                } else {
+                                    throw new Error('Error en la solicitud');
+                                }
+                            })
+                            .catch(error => {
+                                alert('Hubo un problema al agregar el curso: ' + error.message);
+                            });
+                    }
+
+                } else {
+                    alert("Contraseña incorrecta");
+                }
+            })
+            .catch(function (error) {
+                alert("ha ocurrido un error");
+                console.error(error);
+            });
+    });
+</script>
+{%endblock%}

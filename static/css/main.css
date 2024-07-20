@@ -339,8 +339,6 @@ input::file-selector-button:hover {
   height: fit-content;
 }
 
-
-
 #submit:hover,
 #regBtn:hover,
 #logBtn:hover,
@@ -429,7 +427,28 @@ input::file-selector-button:hover {
   margin-top: 3%;
   text-align: left !important;
 }
-#buyBtn{
+#buyBtn {
   width: 200px;
   font-size: 1.5em;
+}
+
+#bodyCompra {
+  display: flex;
+  justify-content: center;
+  background-image: url(../img/banner.png);
+  background-position: center;
+  background-size: 1500px;
+  background-blend-mode: multiply;
+}
+
+.formCompra {
+  background-color: #ffffff;
+  border-radius: 25px;
+  margin: 60px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 400px;
+  width: 400px;
 }

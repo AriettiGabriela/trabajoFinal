@@ -16,44 +16,47 @@
         event.preventDefault(); // Evitar que se envíe el formulario automáticamente
         var dniInput = document.getElementById("dni").value;
         var passInput = document.getElementById("pass").value;
-        var url = "https://basealumnosidp-default-rtdb.firebaseio.com/alumnos.json";
 
         // Realizar la petición GET a la API para obtener los registros
         fetch("https://basealumnosidp-default-rtdb.firebaseio.com/alumnos.json")
             .then(function (response) {
-                return response.json();
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error("Error al obtener los datos de la base");
             })
             .then(function (data) {
-                var userreg = false;
+                var userFound = false;
                 var userId;
 
-                // Buscar el registro que coincida con el MAIL y la contraseña ingresados
+
                 for (var key in data) {
-                    if (data.hasOwnProperty(key) && data[key].dni == dniInput) {
-                        for (var key in data) {
-                            if (data.hasOwnProperty(key) && data[key].pass === passInput) {
-                                userId = key;
-                                window.location.href = "aula?id=" + encodeURIComponent(userId);
-                                break;
-                            }
-                            else {
-                                alert("Contraseña incorrecta. Por favor, intenta nuevamente.");
-                                break;
-                            }
+                    if (data.hasOwnProperty(key)) {
+                        if (data[key].dni === dniInput) {
+                            userId = key;
+                            userFound = true;
+                            break;
                         }
-                        break;
                     }
-                    else {
-                        alert("El usuario no se encuentra registrado. Crea una cuenta en la sección 'REGISTRO'");
-                        break;
-                    }
+                }
+
+                if (!userFound) {
+                    alert("El usuario no esta registrado");
+                    return;
+                }
+
+                if (data[userId].pass === passInput) {
+                    window.location.href = "aula?id=" + encodeURIComponent(userId);
+                } else {
+                    alert("Contraseña incorrecta");
                 }
             })
             .catch(function (error) {
-                alert("Ha ocurrido un error. Por favor, intenta nuevamente.");
+                alert("ha ocurrido un error");
                 console.error(error);
             });
     });
+
     document.getElementById("regBtn").addEventListener("click", function (registro) {
         event.preventDefault(); // Evitar que se envíe el formulario automáticamente
         window.location.href = "{{url_for('registro')}}";
