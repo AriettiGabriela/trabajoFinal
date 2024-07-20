@@ -312,7 +312,8 @@ input,
 #datBtn,
 .botoncito,
 #buyBtn,
-.botoncito2 {
+.botoncito2,
+#outBtn {
   border-radius: 15px;
   height: 12%;
   border-color: #fff;
@@ -330,7 +331,8 @@ input::file-selector-button:hover {
 #datBtn,
 .botoncito,
 #buyBtn,
-.botoncito2 {
+.botoncito2,
+#outBtn {
   background-color: #46c6cd;
   border-style: solid;
   border-color: #0fb2d7;
@@ -347,18 +349,21 @@ input::file-selector-button:hover {
 #datBtn:hover,
 .botoncito:hover,
 #buyBtn:hover,
-.botoncito2:hover {
+.botoncito2:hover,
+#outBtn:hover {
   background-color: #4caccc;
   color: #ffffff;
 }
-#datBtn {
-  width: 15%;
-  min-width: 8px;
-  height: 6%;
+#datBtn,
+#outBtn {
+  width: 150px;
+  height: 50px;
+  margin-right: 10px;
   font-size: 1.1em;
 }
 
-.formularioR {
+.formularioR,
+.formDatos {
   background-color: #ffffff99;
   padding: 30px;
   border-radius: 25px;
@@ -372,6 +377,14 @@ input::file-selector-button:hover {
 
 .formularioR > input {
   height: 8%;
+}
+.formDatos{
+  background-color: #aad7e7;
+}
+
+.formDatos > input{
+  height: 8%;
+  margin-bottom: 5px;
 }
 /*ESTILO AULA*/
 .divperfil {
@@ -405,6 +418,9 @@ input::file-selector-button:hover {
 }
 #title {
   font-size: 3rem;
+}
+.btnperfil {
+  display: flex;
 }
 /*ESTILOS DETALLE*/
 #portadacurso {
@@ -457,6 +473,6 @@ input::file-selector-button:hover {
 }
 
 .botoncito2 {
-height: 50px;
-width: 150px;
+  height: 50px;
+  width: 150px;
 }

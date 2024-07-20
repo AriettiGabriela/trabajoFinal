@@ -1,0 +1,37 @@
+{% extends "layout.html" %} {%block content%}
+<form class="formDatos" id="loginForm">
+    <h1 id="titulo">MODIFICA TUS DATOS</h1>
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" required>
+    <label for="dni">DNI:</label>
+    <input type="text" id="dni" required>
+    <label for="mail">Mail:</label>
+    <input type="text" id="mail" required>
+    <label for="pass">Contraseña:</label>
+    <input type="password" id="pass" required>
+    <label for="foto">Modificar foto:</label>
+    <input type="file" name="imgperfil" id="file" required>
+</form>
+<style>
+    #header,
+    .line {
+        display: none;
+    }
+</style>
+<script>
+    var urlParams = new URLSearchParams(window.location.search);
+    var userId = urlParams.get("id");
+    var registroUrl = "https://basealumnosidp-default-rtdb.firebaseio.com/alumnos/" + userId + ".json";
+    fetch(registroUrl)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            document.getElementById("nombre").value = data.nombre;
+            document.getElementById("dni").value = data.dni;
+            document.getElementById("mail").value = data.mail;
+            document.getElementById("pass").value = data.pass;
+        })
+
+</script>
+{%endblock%}
