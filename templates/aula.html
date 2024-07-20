@@ -32,7 +32,7 @@
             const cursos = [data.curso1, data.curso2, data.curso3];
             cursos.forEach(llamaCards)
             function llamaCards(value, index, array) {
-                if (value !== "null" || value !== "") {
+                if (value !== "null" && value !== "") {
 
                     fetch("https://tiendacursosidp-default-rtdb.firebaseio.com/cursos/" + value + ".json")
                         .then(function (response) {
@@ -60,10 +60,18 @@
                             duracion.classList.add('card-text');
                             duracion.textContent = 'Duración: ' + curso.duracion;
 
+                            const info = document.createElement('button');
+                            info.classList.add('botoncito2');
+                            info.textContent = 'Ver Curso';
+                            info.addEventListener("click", function (detalle) {
+                                window.location.href = "curso?id=" + encodeURIComponent(curso.id);
+                            });
+
 
                             // Agregar los elementos a la card, crea los elementos HTML que conforman una tarjeta y los agrega en el orden correspondiente, para finalmente agregar la tarjeta completa al contenedor de tarjetas.
                             cardBody.appendChild(titulo);
                             cardBody.appendChild(duracion);
+                            cardBody.appendChild(info);
                             card.appendChild(imagen);
                             card.appendChild(cardBody);
                             cardDeck.appendChild(card);

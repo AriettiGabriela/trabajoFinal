@@ -1,0 +1,30 @@
+{% extends "layout.html" %} {%block content%}
+<div>
+    <iframe id="framevideo" width="1000" height="500" src="" title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+
+<script>
+    var urlParams = new URLSearchParams(window.location.search);
+    var cursoId = urlParams.get("id");
+
+
+    fetch("https://tiendacursosidp-default-rtdb.firebaseio.com/cursos/" + cursoId + ".json")
+        .then(function (response) {
+            if (!response.ok) {
+                throw new Error("Network not ok");
+            }
+            return response.json();
+        })
+
+        .then(function (data) {
+            var videoElement = document.getElementById("framevideo");
+            videoElement.src = data.url;
+            videoElement.load();
+        })
+        .catch(function (error) {
+            console.error("error feching data", error);
+        })
+</script>
+{%endblock%}
